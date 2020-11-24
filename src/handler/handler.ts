@@ -16,13 +16,16 @@ export class TelegramHandler {
 
     this.stream.on("tweet", (t: any) => {
       var url = `https://twitter.com/${t.user.screen_name}/status/${t.id_str}`;
-      this.bot.telegram
+      if(t.user.screen_name.toLowerCase() == 'zaphosting') {
+        this.bot.telegram
         .sendMessage(
           "@zaphostingnews",
           `Neuer Tweet von ZapHosting:\n${url}`,
           Extra.webPreview(true)
         )
         .then((result: any) => {});
+      }
+      
     });
   }
 
